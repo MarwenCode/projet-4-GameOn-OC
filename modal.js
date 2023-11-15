@@ -137,6 +137,35 @@ const masquerMessageErreur = (input) => {
   formDataDiv.removeAttribute("data-error");
 };
 
+//check email : 
+
+const validerEmail = (email) => {
+  let emailRegExp = new RegExp(
+    "[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+\\w{2}"
+  );
+  if (!emailRegExp.test(email)) {
+    
+   
+
+    throw new Error("L'email n'est pas valide.");
+    
+  }
+};
+
+const validEmail = () => {
+  let emailRegExp = new RegExp(
+    "[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+\\w{2}"
+  );
+  if (!emailRegExp.test(email)) {
+    
+   
+
+    afficherMessageErreur(email, "L'email n'est pas valide.");
+    
+  }
+
+}
+
 // Fonction pour valider le formulaire
 const validerFormulaire = () => {
   const form = document.querySelector("form[name='reserve']");
@@ -160,6 +189,27 @@ const validerFormulaire = () => {
     } else {
       masquerMessageErreur(lastName);
     }
+
+    //valider email 
+    validEmail()
+  // try {
+   
+    
+
+  //   let baliseEmail = form.querySelector('input[type="email"]')
+  //   let email = baliseEmail.value;
+  //   validerEmail(email);
+  //   // afficherMessageErreur(email)
+    
+  // } catch (error) {
+  //   afficherMessageErreur(error.message)
+    
+  // }
+
+
+
+
+
   });
 };
 
