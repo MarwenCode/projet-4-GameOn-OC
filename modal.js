@@ -14,11 +14,13 @@ const formData = document.querySelectorAll(".formData");
 
 //from
 const form = document.querySelector("form");
-const firstName = document.getElementById("first");
-const lastName = document.getElementById("last");
-const email = document.getElementById("email");
-const birthdate = document.getElementById("birthdate");
-const eventNumber = document.getElementById("quantity");
+
+const firstName = form.querySelector("input[name='first']");
+const lastName = form.querySelector("input[name='last']");
+const email = form.querySelector("input[name='email']");
+const birthdayInput = form.querySelector("input[name='birthdate']");
+const eventNumber = form.querySelector("input[name='quantity']");
+const cityInput = form.querySelector("input[name='location']");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -36,14 +38,7 @@ const closeModal = () => {
 };
 close.addEventListener("click", closeModal);
 
-//valider prénom
-// const validerPrenom = (prenom) => {
-//   let nameRegExp = new RegExp("[a-z0-9._-]+\\w{2}");
-//   if(!nameRegExp.test.prenom) {
-//     console.log("le prénom est trop court, Minimum 2 caractères")
-//   }
-// };
-
+//verifier le nom
 const validerNom = (nom) => {
   let nomRegExp = new RegExp("[a-z0-9._-]+\\w{1}");
   if (!nomRegExp.test(nom)) {
@@ -51,6 +46,8 @@ const validerNom = (nom) => {
     throw new Error("Le nom n'est pas valide, Minimum 2 caractères.");
   }
 };
+
+//vérifier le prénom
 const validerPre = (nom) => {
   let nomRegExp = new RegExp("[a-z0-9._-]+\\w{1}");
   if (!nomRegExp.test(nom)) {
@@ -59,71 +56,10 @@ const validerPre = (nom) => {
   }
 };
 
-// gestion d'erreur formulaire
-// const afficherMessageErreurfirst = (message) => {
-//   let formDataInputFirst = document.querySelector(".formData");
-//   formDataInputFirst.setAttribute("data-error-visible", "true");
-//   formDataInputFirst.setAttribute("data-error", message);
-// };
-// const afficherMessageErreurlast = (message) => {
-//   let formDataInputLast = document.querySelector("input[name=last]");
-//   console.log(formDataInputLast);
-//   formDataInputLast.setAttribute("data-error-visible", "true");
-//   formDataInputLast.setAttribute("data-error", message);
-// };
-
-// const masquerMessageErreur = () => {
-//   let formDataInput = document.querySelector(".formData");
-//   formDataInput.removeAttribute("data-error-visible");
-//   formDataInput.removeAttribute("data-error");
-//   let formDataInputLast = document.querySelector("input[name=last]");
-//   formDataInputLast.removeAttribute("data-error-visible");
-//   formDataInputLast.removeAttribute("data-error");
-// };
-
-// const gererFormulaire = () => {
-//   form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     console.log("clicked");
-
-//     // const first = firstName.value;
-//     // const last = lastName.value;
-
-//     // try {
-//     //   validerPre(first);
-//     //   masquerMessageErreur("first");
-
-//     //   validerNom(last);
-//     //   masquerMessageErreur("last");
-//     // } catch (error) {
-//     //   afficherMessageErreurfirst(error.message) 
-//     //   afficherMessageErreurlast(error.message)
-//     //   console.log(error.message);
-//     // }
-
-//     const firstName = document.getElementById('first').value.trim();
-//     const lastName = document.getElementById('last').value.trim();
-
-//     if (firstName.length < 2 || lastName.length < 2) {
-  
-//       document.querySelector('.formData[data-error]').setAttribute('data-error-visible', 'true');
-//     } else {
-//       document.querySelector('.formData[data-error]').setAttribute('data-error-visible', 'false');
-    
-//       // Add additional logic here to handle form submission
-//     }
-
-    
-//   });
-// };
-
-// gererFormulaire();
-
-
 // Fonction pour afficher un message d'erreur
 const afficherMessageErreur = (input, message) => {
   const formDataDiv = input.parentElement; // Récupère l'élément parent de l'input
-  console.log(formData)
+  console.log(formData);
 
   formDataDiv.setAttribute("data-error-visible", "true");
   formDataDiv.setAttribute("data-error", message);
@@ -137,79 +73,132 @@ const masquerMessageErreur = (input) => {
   formDataDiv.removeAttribute("data-error");
 };
 
-//check email : 
+//check email :
+// const validerEmail = () => {
+//   let emailRegExp = new RegExp(
+//     "[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+\\w{2}"
+//   );
+//   if (!emailRegExp.test(email)) {
+//     afficherMessageErreur(email, "L'email n'est pas valide.");
+//   }
+// };
 
-const validerEmail = (email) => {
-  let emailRegExp = new RegExp(
-    "[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+\\w{2}"
-  );
-  if (!emailRegExp.test(email)) {
-    
-   
-
-    throw new Error("L'email n'est pas valide.");
-    
+const validerEmail = () => {
+  let emailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  if (!emailRegExp.test(email.value)) {
+    afficherMessageErreur(email, "L'email n'est pas valide.");
+  } else {
+    masquerMessageErreur(email);
   }
 };
 
-const validEmail = () => {
-  let emailRegExp = new RegExp(
-    "[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+\\w{2}"
-  );
-  if (!emailRegExp.test(email)) {
-    
-   
-
-    afficherMessageErreur(email, "L'email n'est pas valide.");
-    
+//valider date de naissance
+const birthdayDate = (birthdate) => {
+  if (!birthdate) {
+    afficherMessageErreur(
+      birthdayInput,
+      "Vous devez entrer votre date de naissance."
+    );
+    return;
   }
 
-}
+  // Calculer age
+  const userBirthdate = new Date(birthdate);
+  console.log(userBirthdate);
+  const currentDate = new Date();
+  let age = currentDate.getFullYear() - userBirthdate.getFullYear();
 
-// Fonction pour valider le formulaire
+  // vérifier l'age
+  if (age >= 16) {
+    console.log("You are eligible to subscribe.");
+  } else {
+    afficherMessageErreur(
+      birthdayInput,
+      "Vous devez avoir plus de 16 ans pour vous inscrire."
+    );
+  }
+};
+
+//tournois champs
+const Eventnumber = () => {
+  if (eventNumber.value === "") {
+    afficherMessageErreur(
+      eventNumber,
+      "Veuillez saisir votre numéro de tournoi."
+    );
+  }
+};
+
+// City options
+const cityOptions = () => {
+  const selectedCity = document.querySelector("input[name='location']:checked");
+
+  if (!selectedCity) {
+    afficherMessageErreur(cityInput, "Vous devez sélectionner une ville.");
+  } else {
+    masquerMessageErreur(cityInput);
+  }
+};
+
+// Local storage
+let dataUser = JSON.parse(localStorage.getItem("data")) || {};
+
+
+//Notification message for inscription
+
+
+//valider formulaire
+
 const validerFormulaire = () => {
   const form = document.querySelector("form[name='reserve']");
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const firstName = form.querySelector("input[name='first']");
-    const lastName = form.querySelector("input[name='last']");
-
     // Validation du prénom
     if (firstName.value.trim().length < 2) {
-      afficherMessageErreur(firstName, "Le prénom doit avoir au moins 2 caractères.");
+      afficherMessageErreur(
+        firstName,
+        "Le prénom doit avoir au moins 2 caractères."
+      );
     } else {
       masquerMessageErreur(firstName);
     }
 
     // Validation du nom
     if (lastName.value.trim().length < 2) {
-      afficherMessageErreur(lastName, "Le nom doit avoir au moins 2 caractères.");
+      afficherMessageErreur(
+        lastName,
+        "Le nom doit avoir au moins 2 caractères."
+      );
     } else {
       masquerMessageErreur(lastName);
     }
 
-    //valider email 
-    validEmail()
-  // try {
-   
-    
+    //valider email
+    validerEmail();
 
-  //   let baliseEmail = form.querySelector('input[type="email"]')
-  //   let email = baliseEmail.value;
-  //   validerEmail(email);
-  //   // afficherMessageErreur(email)
-    
-  // } catch (error) {
-  //   afficherMessageErreur(error.message)
-    
-  // }
+    // Validation de la date de naissance
+    birthdayDate(birthdayInput.value);
+
+    //valider event
+    Eventnumber();
+
+    //valider ville
+    cityOptions();
+
+    // Ajouter les données au localStorage
+    dataUser = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      birthdate: birthdayInput.value,
+      eventnumber: eventNumber.value,
+      cityInput: cityInput ? cityInput.value : null,
+    };
 
 
-
-
-
+    localStorage.setItem("data", JSON.stringify(dataUser));
   });
 };
 
