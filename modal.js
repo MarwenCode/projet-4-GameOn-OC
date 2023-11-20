@@ -142,10 +142,34 @@ const cityOptions = () => {
 
 // Local storage
 let dataUser = JSON.parse(localStorage.getItem("data")) || {};
-
+console.log(dataUser);
 
 //Notification message for inscription
+//notification
+const showModalNotification = () => {
+  const modal = document.querySelector(".show_modal");
 
+  modal.style.display = "block";
+  
+
+  // if (dataUser) {
+  //   modal.style.display = "block";
+  // }
+};
+
+//fermer le message de notification
+
+const closeModalNotidicaton = () => {
+  const modalBtn = document.querySelector(".show_modal");
+
+  modalBtn.addEventListener("click", (e) => {
+    console.log("clicked");
+    e.preventDefault();
+    modalBtn.style.display = "none";
+  });
+};
+
+closeModalNotidicaton();
 
 //valider formulaire
 
@@ -197,10 +221,31 @@ const validerFormulaire = () => {
       cityInput: cityInput ? cityInput.value : null,
     };
 
-
     localStorage.setItem("data", JSON.stringify(dataUser));
+
+    // if (dataUser) {
+    //   const contentForm = document.querySelector(".bground");
+    //   contentForm.style.display = "none";
+    //   // showModalNotification();
+    // }
   });
 };
 
 // Appel de la fonction pour valider le formulaire
 validerFormulaire();
+
+// vider les champs du formulaire apres l'envoi
+// const viderChamps = () => {
+//   const sucess = validerFormulaire();
+//   if (sucess) {
+//     firstName.value = "";
+//     lastName.value = "";
+//     email.value = "";
+//     eventNumber.value = "";
+//     cityInput.value = "";
+//     selectedCity.value = "";
+    
+//   }
+// };
+
+// viderChamps();

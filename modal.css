@@ -531,11 +531,56 @@ footer {
 
 
 
-/* #errorMessage {
-  color:red;
-  font-size: small;
+.notification {
+  /* display: none;     */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+   
 }
-#errorMessageName {
-  color:red;
-  font-size: small;
-} */
+
+.show_modal {
+  display:none;
+
+ 
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 -
+  8px 8px rgba(0, 0, 0, 0.2) inset;
+  color: #fff;
+  max-width: 400px;
+
+background-color: #232323;
+  padding: 20px;
+  position: absolute;
+  z-index: 1;
+ 
+  transform: translate(180%,-500%);
+  justify-content: center;
+  align-items: center;
+  }
+
+
+  .msg {
+    font-size: large;
+    margin-bottom: 20px;
+
+  }
+
+  .btn{
+    font-size:1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fe142f;
+    display: block;
+    margin: 0 auto;
+    border-radius: 7px;
+    font-size: 1rem;
+    padding: 12px 82px;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    }
+
