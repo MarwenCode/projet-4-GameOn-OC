@@ -73,16 +73,6 @@ const masquerMessageErreur = (input) => {
   formDataDiv.removeAttribute("data-error");
 };
 
-//check email :
-// const validerEmail = () => {
-//   let emailRegExp = new RegExp(
-//     "[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+\\w{2}"
-//   );
-//   if (!emailRegExp.test(email)) {
-//     afficherMessageErreur(email, "L'email n'est pas valide.");
-//   }
-// };
-
 const validerEmail = () => {
   let emailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (!emailRegExp.test(email.value)) {
@@ -94,6 +84,7 @@ const validerEmail = () => {
 
 //valider date de naissance
 const birthdayDate = (birthdate) => {
+  masquerMessageErreur(birthdayInput);
   if (!birthdate) {
     afficherMessageErreur(
       birthdayInput,
@@ -117,14 +108,16 @@ const birthdayDate = (birthdate) => {
       "Vous devez avoir plus de 16 ans pour vous inscrire."
     );
   }
+  return;
 };
 
 //tournois champs
 const Eventnumber = () => {
+  masquerMessageErreur(eventNumber);
   if (eventNumber.value === "") {
     afficherMessageErreur(
       eventNumber,
-      "Veuillez saisir votre numéro de tournoi."
+      "Veuillez saisir le nombre de vos participations."
     );
   }
 };
@@ -139,37 +132,6 @@ const cityOptions = () => {
     masquerMessageErreur(cityInput);
   }
 };
-
-// Local storage
-let dataUser = JSON.parse(localStorage.getItem("data")) || {};
-console.log(dataUser);
-
-//Notification message for inscription
-//notification
-const showModalNotification = () => {
-  const modal = document.querySelector(".show_modal");
-
-  modal.style.display = "block";
-  
-
-  // if (dataUser) {
-  //   modal.style.display = "block";
-  // }
-};
-
-//fermer le message de notification
-
-const closeModalNotidicaton = () => {
-  const modalBtn = document.querySelector(".show_modal");
-
-  modalBtn.addEventListener("click", (e) => {
-    console.log("clicked");
-    e.preventDefault();
-    modalBtn.style.display = "none";
-  });
-};
-
-closeModalNotidicaton();
 
 //valider formulaire
 
@@ -212,40 +174,76 @@ const validerFormulaire = () => {
     cityOptions();
 
     // Ajouter les données au localStorage
-    dataUser = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      birthdate: birthdayInput.value,
-      eventnumber: eventNumber.value,
-      cityInput: cityInput ? cityInput.value : null,
-    };
+    // dataUser = {
+    //   firstName: firstName.value,
+    //   lastName: lastName.value,
+    //   email: email.value,
+    //   birthdate: birthdayInput.value,
+    //   eventnumber: eventNumber.value,
+    //   cityInput: cityInput ? cityInput.value : null,
+    // };
 
-    localStorage.setItem("data", JSON.stringify(dataUser));
+    // console.log(dataUser);
 
-    // if (dataUser) {
-    //   const contentForm = document.querySelector(".bground");
-    //   contentForm.style.display = "none";
-    //   // showModalNotification();
-    // }
+    if (
+      firstName.value &&
+      lastName.value &&
+      email.value &&
+      birthdayInput.value &&
+      eventNumber.value &&
+      cityInput.value
+    ) {
+      // Utilisation de la fonction avec un message spécifique
+      showModalNotification("Merci pour votre inscription!");
+      modalbg.style.display = "none";
+    }
   });
 };
 
 // Appel de la fonction pour valider le formulaire
 validerFormulaire();
 
-// vider les champs du formulaire apres l'envoi
-// const viderChamps = () => {
-//   const sucess = validerFormulaire();
-//   if (sucess) {
-//     firstName.value = "";
-//     lastName.value = "";
-//     email.value = "";
-//     eventNumber.value = "";
-//     cityInput.value = "";
-//     selectedCity.value = "";
-    
-//   }
-// };
+// Créer un modal de notification
+const showModalNotification = (message) => {
+  // Créer les éléments du modal
+  const notification = document.createElement("div");
+  const msg = document.createElement("p");
+  const btn = document.createElement("button");
 
-// viderChamps();
+  // Ajouter des classes aux éléments pour le style
+  notification.classList.add("content");
+  // msg.classList.add("msg");
+  btn.classList.add("button");
+
+  // Ajouter le texte au paragraphe
+  msg.textContent = message;
+
+  // Ajouter le bouton "Fermer"
+  btn.textContent = "Fermer";
+  btn.addEventListener("click", () => {
+    // Fermer le modal en supprimant l'élément de la page
+    document.body.removeChild(notification);
+
+    restFormulaire();
+  });
+
+  // Ajouter les éléments au modal
+  notification.appendChild(msg);
+  notification.appendChild(btn);
+
+  // Ajouter le modal à la page
+  document.body.appendChild(notification);
+};
+
+//rest formulaire
+const restFormulaire = () => {
+  firstName.value = "";
+  lastName.value = "";
+  email.value = "";
+  birthdayInput.value = "";
+  eventNumber.value = "";
+  cityInput.value = "";
+
+  //reste formulaire
+  launchModal();
+};
