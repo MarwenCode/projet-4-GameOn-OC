@@ -197,6 +197,8 @@ const validerFormulaire = () => {
       showModalNotification("Merci pour votre inscription!");
       modalbg.style.display = "none";
     }
+
+      
   });
 };
 
@@ -206,33 +208,53 @@ validerFormulaire();
 // Créer un modal de notification
 const showModalNotification = (message) => {
   // Créer les éléments du modal
-  const notification = document.createElement("div");
+  // const bground = document.createElement("div");
+  const content = document.createElement("div");
+  const modalBody = document.createElement("div");
   const msg = document.createElement("p");
   const btn = document.createElement("button");
 
   // Ajouter des classes aux éléments pour le style
-  notification.classList.add("content");
+ 
+  // bground.classList.add("bground");
+  content.classList.add("content");
+  modalBody.classList.add("modal-body");
+
   // msg.classList.add("msg");
-  btn.classList.add("button");
+  btn.classList.add("btn-submit");
 
   // Ajouter le texte au paragraphe
+  content.style.transform = "translate(0%, -120%)";
+  content.style.zIndex= "1";
+  
+
   msg.textContent = message;
+  msg.style.padding = "300px 25px";
+  msg.style.fontSize = "30px";
+  msg.style.textAlign = "center";
 
   // Ajouter le bouton "Fermer"
   btn.textContent = "Fermer";
+  btn.style.justifyContent="center";
   btn.addEventListener("click", () => {
     // Fermer le modal en supprimant l'élément de la page
-    document.body.removeChild(notification);
+    document.body.removeChild(content);
 
     restFormulaire();
   });
 
   // Ajouter les éléments au modal
-  notification.appendChild(msg);
-  notification.appendChild(btn);
+  // bground.append(content);
+  content.append(modalBody);
+  modalBody.append(msg);
+  modalBody.append(btn);
 
   // Ajouter le modal à la page
-  document.body.appendChild(notification);
+  document.body.append(content);
+
+  //add scroll top to display this modal
+  // Scroll up
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 //rest formulaire
