@@ -173,32 +173,16 @@ const validerFormulaire = () => {
     //valider ville
     cityOptions();
 
-    // Ajouter les données au localStorage
-    // dataUser = {
-    //   firstName: firstName.value,
-    //   lastName: lastName.value,
-    //   email: email.value,
-    //   birthdate: birthdayInput.value,
-    //   eventnumber: eventNumber.value,
-    //   cityInput: cityInput ? cityInput.value : null,
-    // };
+    const errorElements = document.querySelectorAll(
+      "[data-error-visible='true']"
+    );
+    console.log(errorElements.length);
 
-    // console.log(dataUser);
-
-    if (
-      firstName.value &&
-      lastName.value &&
-      email.value &&
-      birthdayInput.value &&
-      eventNumber.value &&
-      cityInput.value
-    ) {
+    if (errorElements.length === 0) {
       // Utilisation de la fonction avec un message spécifique
       showModalNotification("Merci pour votre inscription!");
       modalbg.style.display = "none";
     }
-
-      
   });
 };
 
@@ -215,7 +199,7 @@ const showModalNotification = (message) => {
   const btn = document.createElement("button");
 
   // Ajouter des classes aux éléments pour le style
- 
+
   // bground.classList.add("bground");
   content.classList.add("content");
   modalBody.classList.add("modal-body");
@@ -225,8 +209,7 @@ const showModalNotification = (message) => {
 
   // Ajouter le texte au paragraphe
   content.style.transform = "translate(0%, -120%)";
-  content.style.zIndex= "1";
-  
+  content.style.zIndex = "1";
 
   msg.textContent = message;
   msg.style.padding = "300px 25px";
@@ -235,7 +218,7 @@ const showModalNotification = (message) => {
 
   // Ajouter le bouton "Fermer"
   btn.textContent = "Fermer";
-  btn.style.justifyContent="center";
+  btn.style.justifyContent = "center";
   btn.addEventListener("click", () => {
     // Fermer le modal en supprimant l'élément de la page
     document.body.removeChild(content);
@@ -244,7 +227,6 @@ const showModalNotification = (message) => {
   });
 
   // Ajouter les éléments au modal
-  // bground.append(content);
   content.append(modalBody);
   modalBody.append(msg);
   modalBody.append(btn);
@@ -264,7 +246,7 @@ const restFormulaire = () => {
   email.value = "";
   birthdayInput.value = "";
   eventNumber.value = "";
-  cityInput.value = "";
+  cityInput.checked = false;
 
   //reste formulaire
   launchModal();

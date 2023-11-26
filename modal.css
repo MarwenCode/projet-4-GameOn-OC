@@ -97,9 +97,27 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    /* margin-top: -15px; */
+  
   }
 } 
+
+
+/* @media screen and (max-width: 320px) {
+
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: -19px;
+
+
+    width: 40px;
+    margin-top: -50px;
+   
+  }
+
+
+} */
 
 main {
   font-size: 130%;
@@ -531,56 +549,26 @@ footer {
 
 
 
-/* .notification {
- 
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-   
+
+@media screen and (max-width: 500px) {
+
+
+  .hero-content {
+    padding: 0;
+    text-align: start;
+  }
+  .hero-headline {
+    font-size: 1.8rem;
+    justify-content: start;
+  }
+  .hero-text {
+    color: #000;
+
+font-family: DM Sans;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  }
 }
-
-.show_modal {
-  display:none;
-
- 
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 -
-  8px 8px rgba(0, 0, 0, 0.2) inset;
-  color: #fff;
-  max-width: 400px;
-
-background-color: #232323;
-  padding: 20px;
-  position: absolute;
-  z-index: 1;
- 
-  transform: translate(180%,-500%);
-  justify-content: center;
-  align-items: center;
-  }
-
-
-  .msg {
-    font-size: large;
-    margin-bottom: 20px;
-
-  }
-
-  .btn{
-    font-size:1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #fe142f;
-    display: block;
-    margin: 0 auto;
-    border-radius: 7px;
-    font-size: 1rem;
-    padding: 12px 82px;
-    color: #fff;
-    cursor: pointer;
-    border: 0;
-    } */
 
