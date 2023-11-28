@@ -222,8 +222,9 @@ const showModalNotification = (message) => {
   btn.addEventListener("click", () => {
     // Fermer le modal en supprimant l'élément de la page
     document.body.removeChild(content);
-
     restFormulaire();
+
+   
   });
 
   // Ajouter les éléments au modal
@@ -237,6 +238,8 @@ const showModalNotification = (message) => {
   //add scroll top to display this modal
   // Scroll up
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+ 
 };
 
 //rest formulaire
@@ -248,6 +251,5 @@ const restFormulaire = () => {
   eventNumber.value = "";
   cityInput.checked = false;
 
-  //reste formulaire
-  launchModal();
+
 };
