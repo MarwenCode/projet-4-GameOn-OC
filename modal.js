@@ -38,23 +38,6 @@ const closeModal = () => {
 };
 close.addEventListener("click", closeModal);
 
-//verifier le nom
-const validerNom = (nom) => {
-  let nomRegExp = new RegExp("[a-z0-9._-]+\\w{1}");
-  if (!nomRegExp.test(nom)) {
-    // console.log("Le nom n'est pas valide.");
-    throw new Error("Le nom n'est pas valide, Minimum 2 caractères.");
-  }
-};
-
-//vérifier le prénom
-const validerPre = (nom) => {
-  let nomRegExp = new RegExp("[a-z0-9._-]+\\w{1}");
-  if (!nomRegExp.test(nom)) {
-    // console.log("Le nom n'est pas valide.");
-    throw new Error("Le prénom n'est pas valide, Minimum 2 caractères.");
-  }
-};
 
 // Fonction pour afficher un message d'erreur
 const afficherMessageErreur = (input, message) => {
@@ -173,16 +156,23 @@ const validerFormulaire = () => {
     //valider ville
     cityOptions();
 
-    const errorElements = document.querySelectorAll(
-      "[data-error-visible='true']"
-    );
-    console.log(errorElements.length);
 
-    if (errorElements.length === 0) {
-      // Utilisation de la fonction avec un message spécifique
-      showModalNotification("Merci pour votre inscription!");
-      modalbg.style.display = "none";
-    }
+    //afficher la modal apres validation du formulaire
+    // const errorElements = document.querySelectorAll(
+    //   "[data-error-visible='true']"
+    // );
+    // console.log(errorElements.length);
+
+    // if (errorElements.length === 0) {
+    //   // Utilisation de la fonction avec un message spécifique
+    //   showModalNotification("Merci pour votre inscription!");
+    //   modalbg.style.display = "none";
+     
+    // }
+
+
+    showModalNotification("Merci pour votre inscription!");
+    
   });
 };
 
