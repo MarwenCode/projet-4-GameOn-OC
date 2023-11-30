@@ -156,23 +156,16 @@ const validerFormulaire = () => {
     //valider ville
     cityOptions();
 
+    const errorElements = document.querySelectorAll(
+      "[data-error-visible='true']"
+    );
+    console.log(errorElements.length);
 
-    //afficher la modal apres validation du formulaire
-    // const errorElements = document.querySelectorAll(
-    //   "[data-error-visible='true']"
-    // );
-    // console.log(errorElements.length);
-
-    // if (errorElements.length === 0) {
-    //   // Utilisation de la fonction avec un message spécifique
-    //   showModalNotification("Merci pour votre inscription!");
-    //   modalbg.style.display = "none";
-     
-    // }
-
-
-    showModalNotification("Merci pour votre inscription!");
-    
+    if (errorElements.length === 0) {
+      // Utilisation de la fonction avec un message spécifique
+      showModalNotification("Merci pour votre inscription!");
+      modalbg.style.display = "none";
+    }
   });
 };
 
